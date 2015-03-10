@@ -1,7 +1,8 @@
 {
   "name": "ember-parse-adapter",
-  "version": "0.5.3",
   "description": "Ember Data Adapter for Parse",
+  "version": "0.5.2",
+  "main": "dist/ember-parse-adapter.js",
   "directories": {
     "doc": "doc",
     "test": "tests"
@@ -25,6 +26,12 @@
   ],
   "license": "MIT",
   "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-jshint": "~0.1.0",
+    "grunt-contrib-qunit": "~0.1.1",
+    "grunt-contrib-uglify": "~0.8.0",
+    "grunt-contrib-connect": "~0.1.0",
+    "grunt-contrib-concat": "~0.1.2"
     "broccoli-asset-rev": "^2.0.0",
     "ember-cli": "0.2.7",
     "ember-cli-app-version": "0.3.2",
