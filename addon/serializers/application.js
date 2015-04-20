@@ -172,7 +172,8 @@ export default DS.RESTSerializer.extend({
   serializeHasMany: function( record, json, relationship ) {
     var key     = relationship.key,
       hasMany = record.get( key ),
-      options = relationship.options;
+      options = relationship.options,
+      self = this;
 
     if ( hasMany && hasMany.get( 'length' ) > 0 ) {
       json[key] = { 'objects': [] };
@@ -188,7 +189,7 @@ export default DS.RESTSerializer.extend({
       hasMany.forEach( function( child ) {
         json[key].objects.push({
           '__type'    : 'Pointer',
-          'className' : child.parseClassName(),
+          'className' : self.parseClassName(child.typeKey),
           'objectId'  : child.get( 'id' )
         });
       });
