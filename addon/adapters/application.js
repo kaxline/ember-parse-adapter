@@ -21,7 +21,7 @@ export default DS.RESTAdapter.extend({
   classesPath: 'classes',
 
   pathForType: function( type ) {
-    if ( 'parseUser' === type ) {
+    if ( 'user' === type ) {
       return 'users';
     } else if ( 'login' === type ) {
       return 'login';
