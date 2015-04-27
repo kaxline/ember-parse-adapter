@@ -168,11 +168,11 @@ export default DS.RESTSerializer.extend({
     }
   },
 
-  serializeHasMany: function( snapshot, json, relationship ) {
-    var key   = relationship.key,
-      hasMany = snapshot.hasMany( key ),
-      options = relationship.options,
-      _this   = this;
+  serializeHasMany: function( record, json, relationship ) {
+    var key      = relationship.key,
+      hasMany  = record.get( key ),
+      options  = relationship.options,
+      serializer = this; 
 
     if ( hasMany && hasMany.get( 'length' ) > 0 ) {
       json[key] = [];
@@ -188,8 +188,8 @@ export default DS.RESTSerializer.extend({
       hasMany.forEach( function( child ) {
         json[key].push({
           '__type'    : 'Pointer',
-          'className' : _this.parseClassName(child.type.typeKey),
-          'objectId'  : child.id
+          'className' : serializer.parseClassName( child.typeKey ),
+          'objectId'  : child.get( 'id' )
         });
       });
 
