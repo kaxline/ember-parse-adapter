@@ -188,8 +188,8 @@ export default DS.RESTSerializer.extend({
       hasMany.forEach( function( child ) {
         json[key].push({
           '__type'    : 'Pointer',
-          'className' : serializer.parseClassName( child.typeKey ),
-          'objectId'  : child.get( 'id' )
+          'className' : _this.parseClassName(child.type.typeKey),
+          'objectId'  : child.id
         });
       });
 
