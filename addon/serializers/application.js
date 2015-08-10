@@ -222,7 +222,7 @@ export default DS.RESTSerializer.extend({
       }
 
     } else {
-      json[key] = [];
+      json[key] = null;
     }
   }
 
