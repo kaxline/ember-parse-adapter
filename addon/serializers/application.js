@@ -153,7 +153,7 @@ export default DS.RESTSerializer.extend({
     if (belongsToId) {
       json[key] = {
         '__type'    : 'Pointer',
-        'className' : this.parseClassName(relationship.type.typeKey),
+        'className' : this.parseClassName(relationship.type),
         'objectId'  : belongsToId
       };
     }
