@@ -175,7 +175,7 @@ export default DS.RESTSerializer.extend({
       _this   = this;
 
     if ( hasMany && hasMany.get( 'length' ) > 0 ) {
-      json[key] = [];
+      json[key] = {'objects': []};
 
       if ( options.relation ) {
         json[key].__op = 'AddRelation';
@@ -186,7 +186,7 @@ export default DS.RESTSerializer.extend({
       }
 
       hasMany.forEach( function( child ) {
-        json[key].push({
+        json[key].objects.push({
           '__type'    : 'Pointer',
           'className' : _this.parseClassName(child.type.typeKey),
           'objectId'  : child.attr( 'id' )
