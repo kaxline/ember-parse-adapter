@@ -186,7 +186,7 @@ export default DS.RESTSerializer.extend({
       }
 
       hasMany.forEach( function( child ) {
-        json[key].objects.push({
+        json[key].push({
           '__type'    : 'Pointer',
           'className' : _this.parseClassName(child.type.typeKey),
           'objectId'  : child.attr( 'id' )
