@@ -160,7 +160,7 @@ export default DS.RESTSerializer.extend({
   },
 
   parseClassName: function( key ) {
-    if ( 'parseUser' === key) {
+    if ( 'parseUser' === key || 'user' === key) {
       return '_User';
 
     } else {
