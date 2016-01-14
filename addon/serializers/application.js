@@ -175,7 +175,7 @@ export default DS.RESTSerializer.extend({
       _this   = this;
 
     if ( hasMany && hasMany.get( 'length' ) > 0 ) {
-      json[key] = {'objects': []};
+      json[key] = [];
 
       if ( options.relation ) {
         json[key].__op = 'AddRelation';
@@ -189,7 +189,7 @@ export default DS.RESTSerializer.extend({
         json[key].push({
           '__type'    : 'Pointer',
           'className' : _this.parseClassName(child.type.typeKey),
-          'objectId'  : child.attr( 'id' )
+          'objectId'  : child.id
         });
       });
 
