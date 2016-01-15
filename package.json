@@ -1,8 +1,7 @@
 {
   "name": "ember-parse-adapter",
-  "description": "Ember Data Adapter for Parse",
   "version": "0.5.3",
-  "main": "dist/ember-parse-adapter.js",
+  "description": "Ember Data Adapter for Parse",
   "directories": {
     "doc": "doc",
     "test": "tests"

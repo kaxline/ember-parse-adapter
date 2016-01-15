@@ -166,29 +166,28 @@ export default DS.RESTSerializer.extend({
     }
   },
 
-  serializeHasMany: function( record, json, relationship ) {
-    var key      = relationship.key,
-      hasMany  = record.get( key ),
-      options  = relationship.options,
-      _this = this;
+  serializeHasMany: function( snapshot, json, relationship ) {
+    var key   = relationship.key,
+      hasMany = snapshot.hasMany( key ),
+      options = relationship.options,
+      _this   = this;
 
     if ( hasMany && hasMany.get( 'length' ) > 0 ) {
-      json[key] = [];
+      json[key] = { 'objects': [] };
 
       // an array is not a relationship, right?
-      
+
       /*if ( options.relation ) {
         json[key].__op = 'AddRelation';
       }
-
       if ( options.array ) {
         json[key].__op = 'AddUnique';
       }*/
-      
+
       json[key].__op = 'AddRelation';
 
       hasMany.forEach( function( child ) {
-        json[key].push({
+        json[key].objects.push({
           '__type'    : 'Pointer',
           'className' : _this.parseClassName(child.type.modelName),
           'objectId'  : child.id
