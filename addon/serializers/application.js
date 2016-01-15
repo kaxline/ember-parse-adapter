@@ -170,7 +170,7 @@ export default DS.RESTSerializer.extend({
     var key      = relationship.key,
       hasMany  = record.get( key ),
       options  = relationship.options,
-      serializer = this; 
+      _this = this;
 
     if ( hasMany && hasMany.get( 'length' ) > 0 ) {
       json[key] = [];
