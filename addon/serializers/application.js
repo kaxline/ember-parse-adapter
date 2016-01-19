@@ -188,7 +188,9 @@ export default DS.RESTSerializer.extend({
       _this   = this;
 
     if ( hasMany && hasMany.get( 'length' ) > 0 ) {
-      json[key] = { 'objects': [] };
+      // From upstream repo: json[key] = { 'objects': [] };
+      // Changed this to an Array because that's what Parse says it's expecting
+      json[key] = [];
 
       // an array is not a relationship, right?
 
@@ -202,7 +204,17 @@ export default DS.RESTSerializer.extend({
       json[key].__op = 'AddRelation';
 
       hasMany.forEach( function( child ) {
-        json[key].objects.push({
+        /**
+         * From upstream repo:
+         *
+         *  json[key].objects.push({
+              '__type'    : 'Pointer',
+              'className' : _this.parseClassName(child.type.modelName),
+              'objectId'  : child.id
+            });
+         */
+        // TODO: Remove objects field from the delete methods as well. I'm assuming it's a problem there too.
+        json[key].push({
           '__type'    : 'Pointer',
           'className' : _this.parseClassName(child.type.modelName),
           'objectId'  : child.id
