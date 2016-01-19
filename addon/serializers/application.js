@@ -8,6 +8,17 @@ export default DS.RESTSerializer.extend({
 
   primaryKey: 'objectId',
 
+  /**
+   * Not sure why this isn't happening automatically, but I had to make
+   * it explicit in order for ember-simple-auth-parse to work since
+   * it calls normalize directly.
+   */
+  normalize: function (model, hash, prop) {
+    hash.id = hash.objectId;
+    return this._super(model, hash, prop)
+
+  },
+
   normalizeArrayResponse: function( store, primaryType, payload ) {
     var namespacedPayload = {};
     namespacedPayload[ Ember.String.pluralize( primaryType.modelName ) ] = payload.results;
@@ -103,8 +114,12 @@ export default DS.RESTSerializer.extend({
           data = this.extractRelationship(relationshipMeta.type, relationshipHash);
         } 
         else if (relationshipHash && relationshipMeta.kind === 'hasMany') {
-          // Parse returns the array in relationshipHash.objects
-          data = Ember.A(relationshipHash.objects).map(function(item) {
+
+          // From upstream repo: Parse returns the array in relationshipHash.objects
+
+          // Local change: I had to change relationshipHash.objects to just relationshipHash
+          // because the response from Parse was not delivering an objects field.
+          data = Ember.A(relationshipHash).map(function(item) {
             return this.extractRelationship(relationshipMeta.type, item);
           }, this);
         }
